@@ -1,5 +1,7 @@
 ﻿
-namespace Addressbook.Services;
+using Addressbook.Models;
+
+namespace Addressbook.Models;
 
 
 
@@ -48,43 +50,52 @@ namespace Addressbook.Services;
                     break;
                
                 case "4":
-                    
+                    ShowExitApplicationOption();
                     break;
 
                 default:
                     Console.WriteLine("Invalid option. Press any key to see the menu again.");
-                    
+                    Console.ReadKey();
                     break;
 
             }
-            Console.ReadKey();
+            
         }
     }
 
         //Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
         private void ShowAddContactOption()
         {
-        throw new NotImplementedException();
+
+        //Instansiera en ny contact
+        IContact contact = new Contact();
+        DisplayMenuTitle("Add New Contact");
+        Console.WriteLine("First Name: ");
+        contact.FirstName = 
+
+
         }
 
         private void ShowAllContactsOption()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void ShowRemoveContactOption()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void ShowExitApplicationOption() 
         {
         Console.Clear();
         Console.Write("Are you sure you want to exit? (y/n): ");
-        var input = Console.ReadLine();
+       //Med "?? "" " så säger vi att om användaren inte skriver in något så får vi en tom sträng 
+        var input = Console.ReadLine() ?? " ";
+        //Oavsett om användaren skriver in Y med stor bokstav eller y med liten, så kommer programmet att stängas av.
         if (input.Equals("y", StringComparison.CurrentCultureIgnoreCase))
         {
-
+            Environment.Exit(0);
         }
 
 
@@ -102,6 +113,6 @@ namespace Addressbook.Services;
 
     }
 
-
-
-
+internal interface IContact
+{
+}
