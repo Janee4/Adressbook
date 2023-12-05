@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Adressbook.Interfaces;
+using Addressbook.Interfaces;
 
-namespace Adressbook.Models
+namespace Addressbook.Models
 {
-    public class Person : IPerson
+    public class Contact : IContact
     {
 
         public string FirstName { get; set; } = null!;
