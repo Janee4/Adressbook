@@ -9,14 +9,6 @@ namespace Addressbook.Services;
         //skapa en metod som sköter utskriften av menyn
         void ShowOptionsMenu();
         
-        //Skapa en metod som visar alla kontakter
-        void ShowAllContactsOption ();
-
-        //Skapa en metod som lägger till en kontakt
-        void ShowAddContactOption();
-
-        //Skapa en metod som tar bort en kontakt 
-        void ShowRemoveContactOption();
     }
 
 
@@ -33,24 +25,60 @@ namespace Addressbook.Services;
             Console.WriteLine(
                 "\n1: Add Contact To The Addressbook" +
                 "\n2: Remove Contact From The Addressbook" +
-                "\n3: Show All Contacts In The Addressbook");
+                "\n3: Show All Contacts In The Addressbook" +
+                "\n4: Exit Program");
+                Console.Write("");
+                Console.Write("Enter Menu Option");
+            //användarens svar sparas i variabeln "option" och används sedan i switchen för att välja menyval
+            var option = Console.ReadLine();
+
+            switch(option)
+            {
+
+                case "1":
+                    ShowAddContactOption();
+
+
+                    break;
+
+                case "2":
+                    ShowRemoveContactOption();
+                    break;
+
+               case "3":
+                    ShowAllContactsOption();
+                    break;
+               
+                case "4":
+                    false;
+                    break;
+
+                default:
+                    break;
+
+
+
+
+
+            }
 
                 Console.ReadKey();
 
         }
     }
 
-        public void ShowAddContactOption()
+        //Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
+        private void ShowAddContactOption()
         {
             throw new NotImplementedException();
         }
 
-        public void ShowAllContactsOption()
+        private void ShowAllContactsOption()
         {
             throw new NotImplementedException();
         }
 
-        public void ShowRemoveContactOption()
+        private void ShowRemoveContactOption()
         {
             throw new NotImplementedException();
         }
