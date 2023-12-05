@@ -28,7 +28,7 @@ namespace Addressbook.Services;
                 "\n3: Show All Contacts In The Addressbook" +
                 "\n4: Exit Program");
                 Console.Write("");
-                Console.Write("Enter Menu Option");
+                Console.Write("Enter Menu Option: ");
             //användarens svar sparas i variabeln "option" och används sedan i switchen för att välja menyval
             var option = Console.ReadLine();
 
@@ -37,8 +37,6 @@ namespace Addressbook.Services;
 
                 case "1":
                     ShowAddContactOption();
-
-
                     break;
 
                 case "2":
@@ -50,27 +48,23 @@ namespace Addressbook.Services;
                     break;
                
                 case "4":
-                    false;
+                    
                     break;
 
                 default:
+                    Console.WriteLine("Invalid option. Press any key to see the menu again.");
+                    
                     break;
 
-
-
-
-
             }
-
-                Console.ReadKey();
-
+            Console.ReadKey();
         }
     }
 
         //Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
         private void ShowAddContactOption()
         {
-            throw new NotImplementedException();
+        throw new NotImplementedException();
         }
 
         private void ShowAllContactsOption()
@@ -83,6 +77,21 @@ namespace Addressbook.Services;
             throw new NotImplementedException();
         }
 
+        private void ShowExitApplicationOption() 
+        {
+        Console.Clear();
+        Console.Write("Are you sure you want to exit? (y/n): ");
+        var input = Console.ReadLine();
+        if (input.Equals("y", StringComparison.CurrentCultureIgnoreCase))
+        {
+
+        }
+
+
+
+
+
+        }
         //Skapa en metod som skriver ut titeln på menyn som du kan återanvända för varje option och lägga till valfri titel
         private void DisplayMenuTitle (string title)
         {
