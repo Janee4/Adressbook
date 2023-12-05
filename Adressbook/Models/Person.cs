@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Adressbook.Interfaces;
 
 namespace Adressbook.Models
 {
-    internal class Person
+    public class Person : IPerson
     {
 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public int PhoneNumber { get; set; }
-    public string Email { get; set; }
-    public string AdressInformation { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string? PhoneNumber { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string AdressInformation { get; set; } = null!;
 
-    
+
     }
 }
 

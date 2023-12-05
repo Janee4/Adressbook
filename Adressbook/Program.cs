@@ -1,29 +1,15 @@
-﻿namespace Adressbook
+﻿using Adressbook.Services;
+
+namespace Adressbook
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-           
-            List<string> ContactList = new List<string>();
-
-             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //Skapa en instans av "MenuService-klassen/servicen" 
+            var menuService = new MenuService();
+            //Anropa metoden "ShowOptionsMenu" i menuService instansen
+            menuService.ShowOptionsMenu();
 
 
 
