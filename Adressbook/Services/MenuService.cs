@@ -9,7 +9,7 @@ namespace Addressbook.Models;
    public interface IMenuService
     {
         //skapa en metod som sköter utskriften av menyn
-        void ShowOptionsMenu();
+        void OptionsMenu();
         
     }
 
@@ -18,7 +18,7 @@ namespace Addressbook.Models;
     //Denna klassen innehåller inga properties utan endast logiken för att utföra dessa metoder som den innehåller
     public class MenuService : IMenuService
     {
-        public void ShowOptionsMenu()
+        public void OptionsMenu()
         {
             while (true) 
             {
@@ -38,19 +38,19 @@ namespace Addressbook.Models;
             {
 
                 case "1":
-                    ShowAddContactOption();
+                    AddContactOption();
                     break;
 
                 case "2":
-                    ShowRemoveContactOption();
+                    RemoveContactOption();
                     break;
 
                case "3":
-                    ShowAllContactsOption();
+                    AllContactsOption();
                     break;
                
                 case "4":
-                    ShowExitApplicationOption();
+                    ExitApplicationOption();
                     break;
 
                 default:
@@ -64,29 +64,27 @@ namespace Addressbook.Models;
     }
 
         //Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
-        private void ShowAddContactOption()
+        private void AddContactOption()
         {
 
         //Instansiera en ny contact
         IContact contact = new Contact();
         DisplayMenuTitle("Add New Contact");
         Console.WriteLine("First Name: ");
-        contact.FirstName = 
-
 
         }
 
-        private void ShowAllContactsOption()
+        private void AllContactsOption()
         {
             
         }
 
-        private void ShowRemoveContactOption()
+        private void RemoveContactOption()
         {
             
         }
 
-        private void ShowExitApplicationOption() 
+        private void ExitApplicationOption() 
         {
         Console.Clear();
         Console.Write("Are you sure you want to exit? (y/n): ");

@@ -1,4 +1,5 @@
-﻿using Addressbook.Services;
+﻿using Addressbook.Models;
+
 
 namespace Adressbook
 {
@@ -9,7 +10,7 @@ namespace Adressbook
             //Skapa en instans av "MenuService-klassen/servicen" 
             IMenuService menuService = new MenuService();
             //Anropa metoden "ShowOptionsMenu" i menuService instansen
-            menuService.ShowOptionsMenu();
+            menuService.OptionsMenu();
 
 
 
