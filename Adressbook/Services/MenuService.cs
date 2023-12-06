@@ -73,6 +73,21 @@ public class MenuService : IMenuService
         Console.WriteLine("First Name: ");
         //Spara in användarens värde av "FirstName" och lagra in den i "contact.FirstName" vilket kommer att spara in värdet i vår Contact klass (vi har ju properties där och användarens svar sparas in i dessa properties).
         contact.FirstName = Console.ReadLine()!; //Med "!" lovar vi kompilatorn att jag som utvecklare tar på mig ansvaret att garantera att värdet inte är 'null', dvs det kommer att komma in ett svar som inte är null.
+
+        Console.WriteLine("Last Name: ");
+        contact.LastName = Console.ReadLine()!;
+
+        Console.WriteLine("Email: ");
+        contact.Email = Console.ReadLine()!;
+
+        Console.WriteLine("Phone number: ");
+        contact.PhoneNumber = Console.ReadLine()!;
+
+        Console.WriteLine("Adressinformation: ");
+        contact.AddressInformation = Console.ReadLine()!;
+
+     
+
     }
 
     private void AllContactsOption()
