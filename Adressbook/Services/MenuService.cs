@@ -7,15 +7,6 @@ namespace Addressbook.Models;
 /// MenuService hanterar användargränssnittet och menyn
 /// </summary>
 
-//skapa en Interface som hanterar utskriften av menyn, den behöver inte returnera något så därav "void"
-public interface IMenuService
-{
-    //skapa en metod som sköter utskriften av menyn
-    void OptionsMenu();
-
-
-}
-
 
 
 //Denna klassen innehåller inga properties utan endast logiken för att utföra dessa metoder som den innehåller
