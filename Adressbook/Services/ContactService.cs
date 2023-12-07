@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Addressbook.Interfaces;
-using Addressbook.Models;
+﻿using Addressbook.Interfaces;
+
 
 namespace Addressbook.Services;
 
@@ -9,14 +7,7 @@ namespace Addressbook.Services;
 /// <summary>
 /// ContactService hanterar allt som rör kontakter och deras lagring
 /// </summary>
-public interface IContactService
 
-{
-    //Lägg till en kontakt i listan genom AddContact-metoden.     
-    void AddContact(IContact contact);
-   
-
-}
 
 
 
