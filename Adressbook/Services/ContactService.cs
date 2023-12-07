@@ -12,6 +12,9 @@ namespace Addressbook.Services;
 public interface IContactService
 
 {
+    //Lägg till en kontakt i listan genom AddContact-metoden.     
+    void AddContact(IContact contact);
+   
 
 }
 
@@ -23,10 +26,9 @@ public class ContactService : IContactService
     //Skapa en lista för att lagra kontakter:
     private List<IContact> contacts = new List<IContact>();
 
-
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
-     * anropas slutligen"AddContact-metoden" i ContactService.
-     * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok".*/
+   * anropas slutligen"AddContact-metoden" i ContactService.
+   * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok".*/
     public void AddContact(IContact contact)
     {
         contacts.Add(contact);
@@ -34,6 +36,7 @@ public class ContactService : IContactService
         Console.ReadKey(); // Vänta på användarens input innan du går tillbaka till menyn
 
     }
+
 
     public List<IContact> GetAllContacts() 
     {

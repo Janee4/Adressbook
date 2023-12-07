@@ -1,5 +1,6 @@
 ﻿using System;
 using Addressbook.Interfaces;
+using Addressbook.Services;
 namespace Addressbook.Models;
 
 /// <summary>
@@ -12,6 +13,7 @@ public interface IMenuService
     //skapa en metod som sköter utskriften av menyn
     void OptionsMenu();
 
+
 }
 
 
@@ -19,6 +21,14 @@ public interface IMenuService
 //Denna klassen innehåller inga properties utan endast logiken för att utföra dessa metoder som den innehåller
 public class MenuService : IMenuService
 {
+    //lägg till en ett privat fält för ContactService som lagrar en instans av ett objekt som implementerar IContactService som hanterar kontakter
+    private IContactService contactService;
+
+    public MenuService(IContactService contactService)
+    {
+        this.contactService = contactService;
+    }
+
     public void OptionsMenu()
     {
         while (true)
@@ -70,13 +80,12 @@ public class MenuService : IMenuService
     private void AddContactOption()
     {
 
-        //Instansiera en ny contact från klassen contact
+        //Instansiera en ny contact från klassen Contact
         IContact contact = new Contact();
         DisplayMenuTitle("Add New Contact");
         Console.WriteLine("First Name: ");
         /*Spara in användarens värde av "FirstName" och lagra in den i "contact.FirstName" vilket kommer att spara in värdet i vår Contact klass 
          * (vi har ju properties där och användarens svar sparas in i dessa properties).*/
-
 
         //Med "!" lovar vi kompilatorn att jag som utvecklare tar på mig ansvaret att garantera att värdet inte är 'null', dvs det kommer att komma in ett svar som inte är null.
         contact.FirstName = Console.ReadLine()!; 
@@ -93,12 +102,11 @@ public class MenuService : IMenuService
         Console.WriteLine("Adressinformation: ");
         contact.AddressInformation = Console.ReadLine()!;
 
-        
+        //Anropa AddContact-metoden i ContactService för att lägga till kontakten i listan:
+
+        contactService.AddContact(contact);
 
 
-
-        //Nu ska vi lägga till denna information som användaren skrivit in någonstans (nu kommer service pattern logiken in för det vi har nu är bara meny logiken, vi skriver bara ut saker och tar emot saker (användarens svar), det är allt vi gjort hittils.)
-     
 
     }
 
