@@ -1,9 +1,10 @@
-﻿
+﻿using System;
 using Addressbook.Interfaces;
-
 namespace Addressbook.Models;
 
-
+/// <summary>
+/// MenuService hanterar användargränssnittet och menyn
+/// </summary>
 
 //skapa en Interface som hanterar utskriften av menyn, den behöver inte returnera något så därav "void"
 public interface IMenuService
@@ -69,12 +70,16 @@ public class MenuService : IMenuService
     private void AddContactOption()
     {
 
-        //Instansiera en ny contact från klassen contact?
+        //Instansiera en ny contact från klassen contact
         IContact contact = new Contact();
         DisplayMenuTitle("Add New Contact");
         Console.WriteLine("First Name: ");
-        //Spara in användarens värde av "FirstName" och lagra in den i "contact.FirstName" vilket kommer att spara in värdet i vår Contact klass (vi har ju properties där och användarens svar sparas in i dessa properties).
-        contact.FirstName = Console.ReadLine()!; //Med "!" lovar vi kompilatorn att jag som utvecklare tar på mig ansvaret att garantera att värdet inte är 'null', dvs det kommer att komma in ett svar som inte är null.
+        /*Spara in användarens värde av "FirstName" och lagra in den i "contact.FirstName" vilket kommer att spara in värdet i vår Contact klass 
+         * (vi har ju properties där och användarens svar sparas in i dessa properties).*/
+
+
+        //Med "!" lovar vi kompilatorn att jag som utvecklare tar på mig ansvaret att garantera att värdet inte är 'null', dvs det kommer att komma in ett svar som inte är null.
+        contact.FirstName = Console.ReadLine()!; 
 
         Console.WriteLine("Last Name: ");
         contact.LastName = Console.ReadLine()!;
@@ -87,6 +92,10 @@ public class MenuService : IMenuService
 
         Console.WriteLine("Adressinformation: ");
         contact.AddressInformation = Console.ReadLine()!;
+
+        
+
+
 
         //Nu ska vi lägga till denna information som användaren skrivit in någonstans (nu kommer service pattern logiken in för det vi har nu är bara meny logiken, vi skriver bara ut saker och tar emot saker (användarens svar), det är allt vi gjort hittils.)
      

@@ -6,6 +6,9 @@ using Addressbook.Models;
 namespace Addressbook.Services;
 
 
+/// <summary>
+/// ContactService hanterar allt som rör kontakter och deras lagring
+/// </summary>
 public interface IContactService
 
 {
@@ -21,8 +24,9 @@ public class ContactService : IContactService
     private List<IContact> contacts = new List<IContact>();
 
 
-    /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" anropas "AddContact-metoden" i ContactService.
-     * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok"*/
+    /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
+     * anropas slutligen"AddContact-metoden" i ContactService.
+     * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok".*/
     public void AddContact(IContact contact)
     {
         contacts.Add(contact);
@@ -36,8 +40,4 @@ public class ContactService : IContactService
     
     return contacts;
     }
-
-
-
-
 }
