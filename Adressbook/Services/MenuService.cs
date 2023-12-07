@@ -63,7 +63,9 @@ public class MenuService : IMenuService
         }
     }
 
-    //Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
+    /// <summary>
+    /// Dessa metoder sätts som private för att de endast behöver nås ifrån MenuService klassen då bara den här klassen ska styra vilken meny som ska visas.
+    /// </summary>
     private void AddContactOption()
     {
 
@@ -77,7 +79,7 @@ public class MenuService : IMenuService
         Console.WriteLine("Last Name: ");
         contact.LastName = Console.ReadLine()!;
 
-        Console.WriteLine("Email: ");
+        Console.WriteLine("E-mail: ");
         contact.Email = Console.ReadLine()!;
 
         Console.WriteLine("Phone number: ");
@@ -86,6 +88,7 @@ public class MenuService : IMenuService
         Console.WriteLine("Adressinformation: ");
         contact.AddressInformation = Console.ReadLine()!;
 
+        //Nu ska vi lägga till denna information som användaren skrivit in någonstans (nu kommer service pattern logiken in för det vi har nu är bara meny logiken, vi skriver bara ut saker och tar emot saker (användarens svar), det är allt vi gjort hittils.)
      
 
     }
