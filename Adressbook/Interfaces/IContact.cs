@@ -7,5 +7,7 @@
         string LastName { get; set; }
         string PhoneNumber { get; set; }
         string AddressInformation { get; set; }
+
+        string ToString();
     }
 }

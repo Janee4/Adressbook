@@ -123,7 +123,15 @@ public class MenuService : IMenuService
 
     private void AllContactsOption()
     {
+        DisplayMenuTitle("The Adress book Contains The Following Contacts:");
 
+        List<IContact> allContacts = contactService.GetAllContacts();
+
+        foreach (IContact contact in allContacts) 
+        {
+        Console.WriteLine($"{contact}");
+        }
+        Console.ReadKey();
     }
 
    

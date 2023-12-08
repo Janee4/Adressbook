@@ -8,6 +8,9 @@
 
         bool RemoveContact(string email);
 
+        List<IContact> GetAllContacts();
+
+
     }
 
 }
