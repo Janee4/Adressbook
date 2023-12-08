@@ -1,5 +1,5 @@
 ﻿using Addressbook.Interfaces;
-
+using System.Linq;
 
 namespace Addressbook.Services;
 
@@ -9,9 +9,6 @@ namespace Addressbook.Services;
 /// </summary>
 
 
-
-
-//Public eller internal?
 public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
@@ -28,10 +25,25 @@ public class ContactService : IContactService
 
     }
 
-
-    public List<IContact> GetAllContacts() 
+    public bool RemoveContact(string email)
     {
-    
-    return contacts;
+        // Använd LINQ för att söka efter kontakten med matchande e-postadress
+        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == email);
+
+        if (contactToRemove != null)
+        {
+            contacts.Remove(contactToRemove);
+            return true; // Returnera true för att indikera att kontakten har tagits bort
+        }
+        else
+        {
+            return false; // Returnera false för att indikera att ingen kontakt hittades med den angivna e-postadressen
+        }
+    }
+
+    public List<IContact> GetAllContacts()
+    {
+
+        return contacts;
     }
 }

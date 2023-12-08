@@ -101,15 +101,34 @@ public class MenuService : IMenuService
 
     }
 
+    public void RemoveContactOption()
+    {
+        DisplayMenuTitle("Remove Contact");
+
+        Console.Write("Please type in the email address of the contact to remove: ");
+        string emailToRemove = Console.ReadLine()!;
+
+        // Anropa RemoveContact-metoden i ContactService för att försöka ta bort kontakten
+        bool contactRemoved = contactService.RemoveContact(emailToRemove);
+
+        if (contactRemoved)
+        {
+            Console.WriteLine("Contact removed successfully!");
+        }
+        else
+        {
+            Console.WriteLine($"Contact with email {emailToRemove} not found.");
+        }
+
+        Console.ReadKey();
+    }
+
     private void AllContactsOption()
     {
 
     }
 
-    private void RemoveContactOption()
-    {
-
-    }
+   
 
     private void ExitApplicationOption()
     {
