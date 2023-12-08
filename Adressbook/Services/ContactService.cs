@@ -25,10 +25,10 @@ public class ContactService : IContactService
 
     }
 
-    public bool RemoveContact(string email)
+    public bool RemoveContact(string emailToRemove)
     {
         // Använd LINQ för att söka efter kontakten med matchande e-postadress
-        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == email);
+        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == emailToRemove);
 
         if (contactToRemove != null)
         {
