@@ -134,7 +134,10 @@ public class MenuService : IMenuService
         Console.ReadKey();
     }
 
-   
+   private void ShowSpecificContact()
+    {
+        
+    }
 
     private void ExitApplicationOption()
     {

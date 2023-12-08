@@ -58,4 +58,10 @@ public class ContactService : IContactService
         return contacts;
         
     }
+
+    public void SpecificContact()
+    {
+
+    }
+
 }

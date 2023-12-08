@@ -11,6 +11,7 @@ namespace Addressbook.Models
         public string Email { get; set; } = null!;
         public string AddressInformation { get; set; } = null!;
 
+        //skapar en strängrepresentation av objektet
         public override string ToString()
         {
             return $"Name: {FirstName} {LastName}, Email: {Email}, Phone: {PhoneNumber}, Address: {AddressInformation}";
