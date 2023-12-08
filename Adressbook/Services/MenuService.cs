@@ -97,8 +97,6 @@ public class MenuService : IMenuService
 
         contactService.AddContact(contact);
 
-
-
     }
 
     public void RemoveContactOption()
