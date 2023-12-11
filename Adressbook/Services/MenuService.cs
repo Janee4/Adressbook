@@ -28,9 +28,10 @@ public class MenuService : IMenuService
             DisplayMenuTitle("MENU OPTIONS");
             Console.WriteLine(
                 "\n1: Add Contact To The Addressbook" +
-                "\n2: Remove Contact From The Addressbook" +
-                "\n3: Show All Contacts In The Addressbook" +
-                "\n4: Exit Program");
+                "\n2: Remove Contact From The Address Book" +
+                "\n3: Show a Specific Contact In The Addess Book " +
+                "\n4: Show All Contacts In The Address Book" +
+                "\n5: Exit Program");
             Console.Write("");
             Console.Write("Enter Menu Option: ");
             //användarens svar sparas i variabeln "option" och används sedan i switchen för att välja menyval
@@ -48,10 +49,14 @@ public class MenuService : IMenuService
                     break;
 
                 case "3":
-                    AllContactsOption();
+                    ShowSpecificContactOption();
                     break;
 
                 case "4":
+                    AllContactsOption();
+                    break;
+
+                case "5":
                     ExitApplicationOption();
                     break;
 
@@ -121,6 +126,13 @@ public class MenuService : IMenuService
         Console.ReadKey();
     }
 
+
+    private void ShowSpecificContactOption()
+    {
+
+    }
+
+
     private void AllContactsOption()
     {
         DisplayMenuTitle("The Adress book Contains The Following Contacts:");
@@ -134,10 +146,7 @@ public class MenuService : IMenuService
         Console.ReadKey();
     }
 
-   private void ShowSpecificContact()
-    {
-        
-    }
+   
 
     private void ExitApplicationOption()
     {

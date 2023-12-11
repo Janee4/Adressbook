@@ -12,7 +12,7 @@ namespace Addressbook.Services;
 public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
-    private List<IContact> contacts = new List<IContact>();
+    private static List<IContact> contacts = new List<IContact>();
 
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
    * anropas slutligen"AddContact-metoden" i ContactService.
