@@ -33,13 +33,12 @@ public class ContactService : IContactService
     ///  Om email adressen inte hittas, kommer contactToRemove att sättas till ett default värde (null i detta fallet då datatypen är "IContact").
     ///  Om email adressen matchar "contactToRemove" (dvs inte är null) så kommer den inuti if-satsen att tas bort ur listan "contacts" med hjälp av "remove" metoden 
     ///  och då returneras värdet "true" som indikation på att metoden lyckats. Om email adressen ej hittas, så returneras "false".
-
     /// </summary>
 
     public bool RemoveContact(string emailToRemove)
     {
         // Använd LINQ för att söka efter kontakten med matchande e-postadress
-        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == emailToRemove);
+        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == emailToRemove)!;
 
         if (contactToRemove != null)
         {
@@ -56,12 +55,43 @@ public class ContactService : IContactService
     {
 
         return contacts;
-        
+
     }
 
-    public void SpecificContact()
+    public IContact GetContact(string emailToShow)
     {
+        IContact contactToShow = contacts.FirstOrDefault(c => c.Email == emailToShow);
 
+        if (contactToShow != null)
+        {
+            Console.WriteLine(contactToShow);
+            return contactToShow;
+        }
+        else
+        {
+            Console.WriteLine("Sorry could not find contact");
+            return null;
+        }
     }
-
 }
+
+
+
+/* HASSES KOMMENTAR
+ 
+När du använder dig av interface och du ska använda dig av JsonConvert så måste du göra en sak
+  
+  var settings = new JsonSerializerSettings 
+  {
+      TypeNameHandling = TypeNameHandling.All
+  }
+  
+  När du ska göra det till json för att spara ner till filen
+  var json = JsonConvert.SerializeObject(_contacts, settings);
+
+  När du vill hämta upp infomrationen från filen och göra det till en lista 
+  _contacts = JsonConvert.DeserializeObject<List<IContact>>(contentFromFile, settings);
+
+
+ 
+ */

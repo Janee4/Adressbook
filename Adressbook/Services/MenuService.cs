@@ -129,6 +129,15 @@ public class MenuService : IMenuService
 
     private void ShowSpecificContactOption()
     {
+        DisplayMenuTitle("Show a Specific Contact");
+
+        Console.Write("Please enter the email address of the contact to show: ");
+        //spara in användarens svar på email adressen av den specifika kontakten som ska visas i variabeln "emailToShow"
+        string emailToShow = Console.ReadLine();
+
+        IContact contactToShow = contactService.GetContact(emailToShow);
+        Console.ReadKey();
+
 
     }
 
@@ -139,14 +148,14 @@ public class MenuService : IMenuService
 
         List<IContact> allContacts = contactService.GetAllContacts();
 
-        foreach (IContact contact in allContacts) 
+        foreach (IContact contact in allContacts)
         {
-        Console.WriteLine($"{contact}");
+            Console.WriteLine($"{contact}");
         }
         Console.ReadKey();
     }
 
-   
+
 
     private void ExitApplicationOption()
     {
