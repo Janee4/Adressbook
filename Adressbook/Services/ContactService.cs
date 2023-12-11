@@ -1,5 +1,7 @@
 ﻿using Addressbook.Interfaces;
 using System.Linq;
+using System.IO;
+using System.Text.Json;
 
 namespace Addressbook.Services;
 
@@ -13,6 +15,51 @@ public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
     private static List<IContact> contacts = new List<IContact>();
+    private const string JsonFileName = "contacts.json"; // Namnet på JSON-filen
+
+    public void SaveContactsToJsonFile()
+    {
+        try
+        {
+            string jsonString = JsonSerializer.Serialize(contacts);
+
+            File.WriteAllText(JsonFileName, jsonString);
+
+            Console.WriteLine("Contacts saved to JSON file.");
+        }
+        catch 
+        {
+            Console.WriteLine("Error saving contacts to JSON file");
+        
+   
+        
+        }
+  
+    }
+    public ContactService()
+    {
+        LoadContactsFromJsonFile();
+    }
+
+    private void LoadContactsFromJsonFile()
+    {
+        try
+        {
+            if (File.Exists(JsonFileName))
+            {
+                string jsonString = File.ReadAllText(JsonFileName);
+
+                contacts = JsonSerializer.Deserialize<List<IContact>>(jsonString);
+
+                Console.WriteLine("Contacts loaded from JSON file.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading contacts from JSON file: {ex.Message}");
+        }
+    }
+
 
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
    * anropas slutligen"AddContact-metoden" i ContactService.
