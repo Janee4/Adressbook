@@ -13,50 +13,10 @@ public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
     private static List<IContact> contacts = new List<IContact>();
-    private readonly string JsonFileName = @"C:\Users\Användare\Documents\contacts.json";
+   //sökvägen till där vi vill att filen ska ligga
+    private readonly FileService _fileService = new FileService(@"C:\Csharp-Projects\Adressbook\content.txt");
 
-    public void SaveContactsToJsonFile()
-    {
-        try
-        {
-            string jsonString = JsonSerializer.Serialize(contacts);
-
-            File.WriteAllText(JsonFileName, jsonString);
-
-            Console.WriteLine("Contacts saved to JSON file.");
-        }
-        catch
-        {
-            Console.WriteLine("Error saving contacts to JSON file");
-
-
-        }
-
-    }
-    public ContactService()
-    {
-        LoadContactsFromJsonFile();
-    }
-
-    private void LoadContactsFromJsonFile()
-    {
-        try
-        {
-            if (File.Exists(JsonFileName))
-            {
-                string jsonString = File.ReadAllText(JsonFileName);
-
-                contacts = JsonSerializer.Deserialize<List<IContact>>(jsonString);
-
-                Console.WriteLine("Contacts loaded from JSON file.");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading contacts from JSON file: {ex.Message}");
-        }
-    }
-
+    
 
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
    * anropas slutligen"AddContact-metoden" i ContactService.
@@ -65,7 +25,7 @@ public class ContactService : IContactService
     {
         contacts.Add(contact);
         Console.WriteLine("Contact added successfully!");
-        SaveContactsToJsonFile();
+        
         Console.ReadKey(); // Vänta på användarens input innan du går tillbaka till menyn
 
     }
@@ -88,7 +48,6 @@ public class ContactService : IContactService
         if (contactToRemove != null)
         {
             contacts.Remove(contactToRemove);
-            SaveContactsToJsonFile();// Anropa för att spara ändringarna till fil
             return true; // Returnera true för att indikera att kontakten har tagits bort
         }
         else
