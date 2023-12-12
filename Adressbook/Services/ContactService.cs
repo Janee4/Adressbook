@@ -35,8 +35,16 @@ public class ContactService : IContactService
             if (!contactsList.Any(x => x.Email == contact.Email))
             {
                 contactsList.Add(contact);
+
+                var settings = new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
                 //sen vill vi spara listan:
-                _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactsList));
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactsList, settings));
+
+
+
             }
         }
         catch (Exception ex) { Debug.Write(ex.Message); }
@@ -51,12 +59,18 @@ public class ContactService : IContactService
     {
         try
         {
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
 
             var content = _fileService.GetContentFromFile();
+
             if (!string.IsNullOrEmpty(content))
             {
-                
-                contactsList = JsonConvert.DeserializeObject<List<IContact>>(content)!;
+
+                contactsList = JsonConvert.DeserializeObject<List<IContact>>(content, settings)!;
+
             }
 
         }

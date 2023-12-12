@@ -1,1 +1,1 @@
-[{"FirstName":"DASD","LastName":"","PhoneNumber":"D","Email":"DAS","AddressInformation":"DA"}]
+{"$type":"System.Collections.Generic.List`1[[Addressbook.Interfaces.IContact, Addressbook]], System.Private.CoreLib","$values":[{"$type":"Addressbook.Models.Contact, Addressbook","FirstName":"jk","LastName":"k","PhoneNumber":"k","Email":"k","AddressInformation":"k"}]}
