@@ -1,6 +1,4 @@
 ﻿using Addressbook.Interfaces;
-using System.Linq;
-using System.IO;
 using System.Text.Json;
 
 namespace Addressbook.Services;
@@ -15,7 +13,7 @@ public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
     private static List<IContact> contacts = new List<IContact>();
-    private const string JsonFileName = "contacts.json"; // Namnet på JSON-filen
+    private readonly string JsonFileName = @"C:\Users\Användare\Documents\contacts.json";
 
     public void SaveContactsToJsonFile()
     {
@@ -27,14 +25,13 @@ public class ContactService : IContactService
 
             Console.WriteLine("Contacts saved to JSON file.");
         }
-        catch 
+        catch
         {
             Console.WriteLine("Error saving contacts to JSON file");
-        
-   
-        
+
+
         }
-  
+
     }
     public ContactService()
     {
@@ -68,6 +65,7 @@ public class ContactService : IContactService
     {
         contacts.Add(contact);
         Console.WriteLine("Contact added successfully!");
+        SaveContactsToJsonFile();
         Console.ReadKey(); // Vänta på användarens input innan du går tillbaka till menyn
 
     }
@@ -90,6 +88,7 @@ public class ContactService : IContactService
         if (contactToRemove != null)
         {
             contacts.Remove(contactToRemove);
+            SaveContactsToJsonFile();// Anropa för att spara ändringarna till fil
             return true; // Returnera true för att indikera att kontakten har tagits bort
         }
         else
