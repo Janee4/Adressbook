@@ -1,21 +1,21 @@
-﻿
-using System.Diagnostics;
+﻿using System.Diagnostics;
+
 
 namespace Addressbook.Services;
 
-    public interface IFileService
-    {
+public interface IFileService
+{
 
-        //ska returnera ett bool värde "jag lyckades spara, eller jag lyckades inte spara" därav bool.
-        bool SaveContentToFile(string content);
-        //läser upp/hämtar sträng värde
-        string GetContentFromFile();
+    //ska returnera ett bool värde "jag lyckades spara, eller jag lyckades inte spara" därav bool.
+    bool SaveContentToFile(string content);
+    //läser upp/hämtar sträng värde
+    string GetContentFromFile();
 
-        
-    }
 
-    public class FileService(string filePath) : IFileService
-    {
+}
+
+public class FileService(string filePath) : IFileService
+{
     private readonly string _filePath = filePath;
 
     public bool SaveContentToFile(string content)
@@ -23,8 +23,8 @@ namespace Addressbook.Services;
         try
         {
             //StreamWriter vill ha in en sökväg som vi sätter in via vår constructor
-            using (var sw = new StreamWriter(_filePath)) 
-            { 
+            using (var sw = new StreamWriter(_filePath))
+            {
                 sw.WriteLine(content);
             }
             //Om den lyckas så returneras true
@@ -34,6 +34,7 @@ namespace Addressbook.Services;
         //Om den inte lyckas/eller kraschar etc så ska den returnera false
         return false;
     }
+
 
 
     public string GetContentFromFile()
@@ -50,7 +51,7 @@ namespace Addressbook.Services;
         return null!;
     }
 
-    
+
 }
 
 

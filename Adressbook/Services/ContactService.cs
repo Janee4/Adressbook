@@ -1,5 +1,9 @@
-﻿using Addressbook.Interfaces;
-using System.Text.Json;
+﻿using System.Collections.Generic;
+using Addressbook.Interfaces;
+using Addressbook.Models;
+using Newtonsoft.Json;
+using System.Diagnostics;
+
 
 namespace Addressbook.Services;
 
@@ -12,24 +16,54 @@ namespace Addressbook.Services;
 public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
-    private static List<IContact> contacts = new List<IContact>();
-   //sökvägen till där vi vill att filen ska ligga
-    private readonly FileService _fileService = new FileService(@"C:\Csharp-Projects\Adressbook\content.txt");
+    private List<IContact> contactsList = new List<IContact>();
+    //sökvägen till där vi vill att filen ska ligga
+    private readonly FileService _fileService = new FileService(@"C:\Csharp-Projects\Adressbook\content.json");
 
-    
+
 
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
    * anropas slutligen"AddContact-metoden" i ContactService.
    * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok".*/
     public void AddContact(IContact contact)
     {
-        contacts.Add(contact);
+
+        try
+        {
+
+            //Här säger vi att endast om det inte finns någon kontakt i listan, så lägger vi in en kontakt (menas det att om det redan finns en kontakt så läggs den inte in? eller så menas det med att samma kontakt inte ska läggas in två gånger?
+            if (!contactsList.Any(x => x.Email == contact.Email))
+            {
+                contactsList.Add(contact);
+                //sen vill vi spara listan:
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactsList));
+            }
+        }
+        catch (Exception ex) { Debug.Write(ex.Message); }
+
+
         Console.WriteLine("Contact added successfully!");
-        
         Console.ReadKey(); // Vänta på användarens input innan du går tillbaka till menyn
 
     }
 
+    public IEnumerable<IContact> GetAllContacts()
+    {
+        try
+        {
+
+            var content = _fileService.GetContentFromFile();
+            if (!string.IsNullOrEmpty(content))
+            {
+                
+                contactsList = JsonConvert.DeserializeObject<List<IContact>>(content)!;
+            }
+
+        }
+        catch (Exception ex) { Debug.Write(ex.Message); }
+        return contactsList;
+
+    }
 
     /// <summary>
     /// Vi använder oss av LINQ metoden FirstOrDefault som kommer att söka igenom listan "contacts" och jämföra den email-adressen användaren skrivit in 
@@ -43,11 +77,11 @@ public class ContactService : IContactService
     public bool RemoveContact(string emailToRemove)
     {
         // Använd LINQ för att söka efter kontakten med matchande e-postadress
-        IContact contactToRemove = contacts.FirstOrDefault(c => c.Email == emailToRemove)!;
+        IContact contactToRemove = contactsList.FirstOrDefault(c => c.Email == emailToRemove)!;
 
         if (contactToRemove != null)
         {
-            contacts.Remove(contactToRemove);
+            contactsList.Remove(contactToRemove);
             return true; // Returnera true för att indikera att kontakten har tagits bort
         }
         else
@@ -56,16 +90,16 @@ public class ContactService : IContactService
         }
     }
 
-    public List<IContact> GetAllContacts()
-    {
+    //public List<IContact> GetAllContacts()
+    //{
 
-        return contacts;
+    //    return contacts;
 
-    }
+    //}
 
     public IContact GetContact(string emailToShow)
     {
-        IContact contactToShow = contacts.FirstOrDefault(c => c.Email == emailToShow);
+        IContact contactToShow = contactsList.FirstOrDefault(c => c.Email == emailToShow);
 
         if (contactToShow != null)
         {

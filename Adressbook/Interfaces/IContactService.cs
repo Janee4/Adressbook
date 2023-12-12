@@ -11,7 +11,7 @@
 
         IContact GetContact(string emailToShow);
 
-        List<IContact> GetAllContacts();
+        IEnumerable<IContact> GetAllContacts();
 
 
     }

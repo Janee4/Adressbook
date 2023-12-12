@@ -146,7 +146,7 @@ public class MenuService : IMenuService
     {
         DisplayMenuTitle("The Adress book Contains The Following Contacts:");
 
-        List<IContact> allContacts = contactService.GetAllContacts();
+        IEnumerable<IContact> allContacts = contactService.GetAllContacts();
 
         foreach (IContact contact in allContacts)
         {
