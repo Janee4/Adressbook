@@ -16,7 +16,7 @@ namespace Addressbook.Services;
 public class ContactService : IContactService
 {
     //Skapa en lista för att lagra kontakter:
-    private List<IContact> contactsList = new List<IContact>();
+    private List<IContact> contactList = new List<IContact>();
     //sökvägen till där vi vill att filen ska ligga
     private readonly FileService _fileService = new FileService(@"C:\Csharp-Projects\Adressbook\content.json");
 
@@ -30,18 +30,17 @@ public class ContactService : IContactService
 
         try
         {
-
             //Här säger vi att endast om det inte finns någon kontakt i listan, så lägger vi in en kontakt (menas det att om det redan finns en kontakt så läggs den inte in? eller så menas det med att samma kontakt inte ska läggas in två gånger?
-            if (!contactsList.Any(x => x.Email == contact.Email))
+            if (!contactList.Any(x => x.Email == contact.Email))
             {
-                contactsList.Add(contact);
+                contactList.Add(contact);
 
                 var settings = new JsonSerializerSettings()
                 {
                     TypeNameHandling = TypeNameHandling.All
                 };
                 //sen vill vi spara listan:
-                _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactsList, settings));
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactList, settings));
 
 
 
@@ -69,13 +68,13 @@ public class ContactService : IContactService
             if (!string.IsNullOrEmpty(content))
             {
 
-                contactsList = JsonConvert.DeserializeObject<List<IContact>>(content, settings)!;
+                contactList = JsonConvert.DeserializeObject<List<IContact>>(content, settings)!;
 
             }
 
         }
         catch (Exception ex) { Debug.Write(ex.Message); }
-        return contactsList;
+        return contactList;
 
     }
 
@@ -91,11 +90,11 @@ public class ContactService : IContactService
     public bool RemoveContact(string emailToRemove)
     {
         // Använd LINQ för att söka efter kontakten med matchande e-postadress
-        IContact contactToRemove = contactsList.FirstOrDefault(c => c.Email == emailToRemove)!;
+        IContact contactToRemove = contactList.FirstOrDefault(c => c.Email == emailToRemove)!;
 
         if (contactToRemove != null)
         {
-            contactsList.Remove(contactToRemove);
+            contactList.Remove(contactToRemove);
             return true; // Returnera true för att indikera att kontakten har tagits bort
         }
         else
@@ -113,7 +112,7 @@ public class ContactService : IContactService
 
     public IContact GetContact(string emailToShow)
     {
-        IContact contactToShow = contactsList.FirstOrDefault(c => c.Email == emailToShow);
+        IContact contactToShow = contactList.FirstOrDefault(c => c.Email == emailToShow);
 
         if (contactToShow != null)
         {
