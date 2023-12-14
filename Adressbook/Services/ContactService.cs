@@ -50,7 +50,6 @@ public class ContactService : IContactService
             return false;
         }
 
-
         Console.WriteLine("Contact added successfully!");
         Console.ReadKey(); // Vänta på användarens input innan du går tillbaka till menyn
 
@@ -99,13 +98,13 @@ public class ContactService : IContactService
             contactList.Remove(contactToRemove);
             SaveContactsToFile();
             return true; // Returnera true för att indikera att kontakten har tagits bort
-            
+
         }
         else
         {
             return false; // Returnera false för att indikera att ingen kontakt hittades med den angivna e-postadressen
         }
-        
+
     }
     private void SaveContactsToFile()
     {
@@ -123,9 +122,8 @@ public class ContactService : IContactService
             Console.WriteLine($"Error saving contacts to file : {ex.Message}");
         }
 
-
     }
-   
+
 
     //public List<IContact> GetAllContacts()
     //{
