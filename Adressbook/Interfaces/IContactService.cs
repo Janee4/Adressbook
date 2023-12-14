@@ -4,7 +4,7 @@
 
     {
         //Lägg till en kontakt i listan genom AddContact-metoden.     
-        void AddContact(IContact contact);
+        bool AddContact(IContact contact);
 
         //Borde det inte vara "emailToRemove" ist för email? 
         bool RemoveContact(string emailToRemove);

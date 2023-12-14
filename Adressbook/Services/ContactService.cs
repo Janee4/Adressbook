@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Addressbook.Interfaces;
-using Addressbook.Models;
+﻿using Addressbook.Interfaces;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -25,7 +23,7 @@ public class ContactService : IContactService
     /*Lägg till en kontakt i listan genom AddContact-metoden. När användaren fyllt i alla uppgifter om kontakten i "AddContactOption-metoden" inuti "MenuService.cs" så 
    * anropas slutligen"AddContact-metoden" i ContactService.
    * Denna metoden tar emot en IContact-instans och lägger till den i vår "contacts-lista" och därmed vår "adressbok".*/
-    public void AddContact(IContact contact)
+    public bool AddContact(IContact contact)
     {
 
         try
@@ -42,11 +40,15 @@ public class ContactService : IContactService
                 //sen vill vi spara listan:
                 _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactList, settings));
 
-
-
+                return true;
             }
+            return false;
         }
-        catch (Exception ex) { Debug.Write(ex.Message); }
+        catch (Exception ex)
+        {
+            Debug.Write(ex.Message);
+            return false;
+        }
 
 
         Console.WriteLine("Contact added successfully!");
@@ -90,18 +92,40 @@ public class ContactService : IContactService
     public bool RemoveContact(string emailToRemove)
     {
         // Använd LINQ för att söka efter kontakten med matchande e-postadress
-        IContact contactToRemove = contactList.FirstOrDefault(c => c.Email == emailToRemove)!;
+        IContact contactToRemove = contactList.FirstOrDefault(c => c.Email == emailToRemove);
 
         if (contactToRemove != null)
         {
             contactList.Remove(contactToRemove);
+            SaveContactsToFile();
             return true; // Returnera true för att indikera att kontakten har tagits bort
+            
         }
         else
         {
             return false; // Returnera false för att indikera att ingen kontakt hittades med den angivna e-postadressen
         }
+        
     }
+    private void SaveContactsToFile()
+    {
+        try
+        {
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+            _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactList, settings));
+            Console.WriteLine("Contacts saved to file.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving contacts to file : {ex.Message}");
+        }
+
+
+    }
+   
 
     //public List<IContact> GetAllContacts()
     //{

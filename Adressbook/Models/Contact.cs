@@ -1,5 +1,4 @@
 ﻿using Addressbook.Interfaces;
-using Addressbook.Models;
 
 namespace Addressbook.Models
 {
