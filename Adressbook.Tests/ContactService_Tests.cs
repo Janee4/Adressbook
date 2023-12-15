@@ -10,7 +10,7 @@ namespace Adressbook.Tests
         public void AddContactShould_AddOneContactToContactList_ThenReturnTrue()
         {
             //Arrange
-            IContact contact = new Contact { FirstName = "", LastName = "", PhoneNumber = "", Email = "", AddressInformation = "" };
+            IContact contact = new Contact { FirstName = "Jane", LastName = "Aban", PhoneNumber = "073-1234567", Email = "Jane@domain.com", AddressInformation = "Privatavägen 30265" };
             IContactService contactService = new ContactService();
 
             //Act (vad för resultat vi förväntar oss)
@@ -18,8 +18,46 @@ namespace Adressbook.Tests
 
             //Assert (om vår metod fungerar, så förväntar true värde returneras)
             Assert.True(result);
+        }
+
+        [Fact]
+
+        public void RemoveContactShould_RemoveOneContactFromContactList_ThenReturnTrue()
+        {
+            //Arrange
+            //Vi skapar först en kontakt och kallar den för "contactToRemove" 
+            IContact contactToRemove = new Contact
+            {
+                FirstName = "Jane",
+                LastName = "Aban",
+                PhoneNumber = "073-1234567",
+                Email = "Jane@domain.com",
+                AddressInformation = "Privatavägen 30265"
+            };
+
+            //Sen skapar vi en instans av IContactService där metoden RemoveContact finns:
+            IContactService contactService = new ContactService();
+            //Nu lägger vi till kontakten "contactToRemove" i listan som finns i contactService med hjälp av AddContact metoden vi redan skapat (och som fungerar).
+            contactService.AddContact(contactToRemove);
+
+
+            //Act
+            //Här tar vi bort kontakten från listan med den angivna emailAdressen
+            bool result = contactService.RemoveContact(contactToRemove.Email);
+
+            //Assert
+            //Vi förväntar oss att om kontakten tas bort så returneras true
+            Assert.True(result);
+            //Om kontaken inte kunde hittas och inte kan tas bort så returneras false: 
+           
 
         }
+
+
+
+
+
+
 
         [Fact]
         public void GetAllContactsShould_GetAllContactsThatAreSavedInTheList_ThenReturnListOfContacts()
@@ -31,12 +69,14 @@ namespace Adressbook.Tests
 
             //Act (Vi anropar GetAllContacts metoden och sparar in det som returneras av metoden till result)
             IEnumerable<IContact> result = contactService.GetAllContacts();
+            
             //Assert
             //Förväntar oss att resultatet inte är null
             Assert.NotNull(result);
             //IsAssignableFrom är en metod som testar om objekten i listan (kontakterna) är av typen IContact/eller av dess subtyper och då kommer testet att passera:
             Assert.IsAssignableFrom<IEnumerable<IContact>>(result);
         }
+
 
 
     }
