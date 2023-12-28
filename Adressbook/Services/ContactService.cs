@@ -55,6 +55,7 @@ public class ContactService : IContactService
 
     }
 
+    //IEnumerable lista är endast en läsbar lista, man ska bara kunna se vilka kontakter som finns i listan
     public IEnumerable<IContact> GetAllContacts()
     {
         try
@@ -110,6 +111,8 @@ public class ContactService : IContactService
     {
         try
         {
+            /*En inställning som gör att json filen kan skilja på de olika objekten av typen IContact när vi sedan i deserialiseringsbiten ska kunna konvertera tillbaka till C# kod
+             när vi hämtar kontakterna från json filen*/
             var settings = new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.All
@@ -125,13 +128,6 @@ public class ContactService : IContactService
     }
 
 
-    //public List<IContact> GetAllContacts()
-    //{
-
-    //    return contacts;
-
-    //}
-
     public IContact GetContact(string emailToShow)
     {
         IContact contactToShow = contactList.FirstOrDefault(c => c.Email == emailToShow);
@@ -143,7 +139,7 @@ public class ContactService : IContactService
         }
         else
         {
-            Console.WriteLine("Sorry could not find contact");
+            Console.WriteLine("Sorry, could not find the contact your searching for. Press any key to see the menu again.");
             return null;
         }
     }

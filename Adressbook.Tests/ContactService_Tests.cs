@@ -48,13 +48,33 @@ namespace Adressbook.Tests
             //Assert
             //Vi förväntar oss att om kontakten tas bort så returneras true
             Assert.True(result);
-            //Om kontaken inte kunde hittas och inte kan tas bort så returneras false: 
-           
-
+   
         }
 
+        [Fact]
+        public void GetContactShould_ReturnExistingContactFromContactList_AndReturnTrue()
+        {
+
+            //Arrange
+            IContact expectedContact = new Contact
+            {
+                FirstName = "Jane",
+                LastName = "Aban",
+                PhoneNumber = "073-1234567",
+                Email = "Jane@domain.com",
+                AddressInformation = "Privatavägen 30265"
+            };
+            IContactService contactService = new ContactService();
+            contactService.AddContact(expectedContact);
+
+            //Act
+            IContact result = contactService.GetContact(expectedContact.Email);
 
 
+            //Assert
+            Assert.NotNull(result); // Verifiera att det returnerade resultatet inte är null
+            Assert.Equal(expectedContact.Email, result.Email); // Verifiera att e-postadresserna matchar
+        }
 
 
 
